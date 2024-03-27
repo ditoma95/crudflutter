@@ -34,68 +34,78 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Enregistrer un utilisateur'),
-      ),
-      body: Form(
-        key: _formkey,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                keyboardType: TextInputType.name,
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter name',
-                  labelText: 'Enter name',
-                  prefixIcon: Icon(Icons.person),
-                ),
-                validator: (value) {
-                  if(value == null || value.isEmpty){
-                    return 'Entrer votre nom';
-                  }else if(value.length < 3){
-                    return 'Le nom doit contenir au moins 3 caractères';
-                  }
-                  return null;
-                },
-              ),
+  
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 20, bottom: 1),
+            child: Text("Enregistrer un utilisateur", 
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, ),),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Form(
+              key: _formkey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.name,
+                      controller: _nameController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter name',
+                        labelText: 'Enter name',
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return 'Entrer votre nom';
+                        }else if(value.length < 3){
+                          return 'Le nom doit contenir au moins 3 caractères';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: _ageController,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.numbers_outlined),
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter age',
+                        labelText: 'Age',
+                      ),
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return 'Entrer votre age';
+                        }
+                    
+                        return null;
+                      },
+                    ),
+                  ),
+            
+                  ElevatedButton(
+                    onPressed: () {
+                      if(_formkey.currentState!.validate()){
+                        ajouter();
+                        clearText();
+                      }
+                    },
+                    child: Text(
+                      "Enregistrer", 
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ),),
+                  )
+                ]
+              )
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                controller: _ageController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.numbers_outlined),
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter age',
-                  labelText: 'Age',
-                ),
-                validator: (value) {
-                  if(value == null || value.isEmpty){
-                    return 'Entrer votre age';
-                  }
-              
-                  return null;
-                },
-              ),
-            ),
-
-            ElevatedButton(
-              onPressed: () {
-                if(_formkey.currentState!.validate()){
-                  ajouter();
-                  clearText();
-                }
-              },
-              child: Text(
-                "Enregistrer", 
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ),),
-            )
-          ]
-        )
+          ),
+        ],
       )
     );
   }

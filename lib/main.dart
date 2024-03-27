@@ -1,4 +1,5 @@
 import 'package:crud/screens/controle_page.dart';
+import 'package:crud/ui/acceuil_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ControlePage(),
+      // home: ControlePage(),
+      home: AccueilPage()
     );
   }
 }
